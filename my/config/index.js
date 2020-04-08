@@ -2,8 +2,8 @@
 var path = require('path')
 var assetsRoot
 var subDirectory
-var indexTemplate
-var indexFilePrePath
+var indexTemplate = ''
+var indexFilePrePath = ''
 var indexFiles
 var isBuild = process.env.npm_lifecycle_event === 'build'
 
@@ -39,6 +39,7 @@ if (isBuild) {
   for (const key in broadcast) {
     console.log(key + ': ', broadcast[key])
   }
+
 }
 
 module.exports = {
