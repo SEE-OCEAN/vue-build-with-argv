@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+        <title>模板页面1</title>
+        <link rel="stylesheet" type="text/css"  href="../static/css/weui.min.css"/>
+        <link rel="stylesheet" type="text/css"  href="../static/css/style.css?v=1.0.0"/>
+        <!-- sdk -->
+        <% if (htmlWebpackPlugin.options.apptype === 'fs') {%>
+        <script type="text/javascript" src="https://s0.pstatp.com/ee/lark/js_sdk/h5-js-sdk-1.4.5.js"></script>
+        <% } %>
+        <% if (htmlWebpackPlugin.options.apptype === 'wx') {%>
+        <script type="text/javascript" src="../static/js/jweixin-1.2.0.js"></script>
+        <script>
+            wx.config({
+                // some code of wx config
+            });
+            wx.ready(function () {
+            wx.hideOptionMenu();
+            })
+        </script>
+        <% } %>
+    </head>
+
+    <body>
+    <div id="app"></div>
+        <script src="../static/js/zepto.min.js"></script>
+        <script src="../static/js/weui.min.js"></script>
+        <!-- built files will be auto injected -->
+    </body>
+</html>
