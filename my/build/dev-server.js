@@ -5,6 +5,8 @@ if (!process.env.NODE_ENV) {
   process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)
 }
 
+var qrcode = require('qrcode-terminal');
+var ip = require('ip').address();
 var opn = require('opn')
 var path = require('path')
 var express = require('express')
@@ -35,6 +37,15 @@ var hotMiddleware = require('webpack-hot-middleware')(compiler, {
 
   }
 })
+// --二维码--
+compiler.plugin('done', function () {
+  setTimeout(function () {
+    console.log('\x1b[32m\x1b[1m\x1b[7mplease scan QR:\x1b[0m');
+    console.log('Link：http://' + ip + ':' + port);
+    qrcode.generate('http://' + ip + ':' + port);
+  })
+});
+// ---
 // force page reload when html-webpack-plugin template changes
 compiler.plugin('compilation', function (compilation) {
   compilation.plugin('html-webpack-plugin-after-emit', function (data, cb) {
