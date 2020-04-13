@@ -39,10 +39,13 @@ var hotMiddleware = require('webpack-hot-middleware')(compiler, {
 })
 // --二维码--
 compiler.plugin('done', function () {
+  var qrurl = `http://${ip}:${port}/r/w?sid=${process.sid}`;
   setTimeout(function () {
     console.log('\x1b[32m\x1b[1m\x1b[7mplease scan QR:\x1b[0m');
-    console.log('Link：http://' + ip + ':' + port);
-    qrcode.generate('http://' + ip + ':' + port);
+    console.log('Link：', qrurl);
+    qrcode.generate(qrurl, {
+      small: true
+    });
   })
 });
 // ---

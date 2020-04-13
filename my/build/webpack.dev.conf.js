@@ -12,6 +12,10 @@ Object.keys(baseWebpackConfig.entry).forEach(function (name) {
   baseWebpackConfig.entry[name] = ['./build/dev-client'].concat(baseWebpackConfig.entry[name])
 })
 
+process.sid = process.argv.pop();
+process.apptype = process.argv[process.argv.length - 1] === 'fs' ? 'fs' : 'wx';
+process.tasktype = process.argv[2] == 'p2' ? 'program2' : 'program1';
+
 module.exports = merge(baseWebpackConfig, {
   module: {
     rules: utils.styleLoaders({
@@ -29,8 +33,11 @@ module.exports = merge(baseWebpackConfig, {
     new webpack.NoEmitOnErrorsPlugin(),
     // https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
+      sid: process.sid,
+      apptype: process.apptype,
       filename: 'index.html',
-      template: process.argv[2] === 'p2' ? pathPrefix + 'program2-index.html' : pathPrefix + 'program1-index.html',
+      // template: process.argv[2] === 'p2' ? pathPrefix + 'program2-index.html' : pathPrefix + 'program1-index.html',
+      template: `${pathPrefix}${process.tasktype}-index.html`,
       inject: true
     }),
     new FriendlyErrorsPlugin()

@@ -9,6 +9,17 @@
         <!-- sdk -->
         <% if (htmlWebpackPlugin.options.apptype === 'fs') {%>
         <script type="text/javascript" src="https://s0.pstatp.com/ee/lark/js_sdk/h5-js-sdk-1.4.5.js"></script>
+        <script>
+            window.h5sdk && window.h5sdk.ready(function () {
+            // 隐藏“返回”
+            window.h5sdk.biz.navigation.setLeft({
+                text: '',
+                isShowIcon: true,
+            });
+            // 隐藏“更多”
+            window.h5sdk.biz.navigation.setRight({ show: false });
+            })
+        </script>
         <% } %>
         <% if (htmlWebpackPlugin.options.apptype === 'wx') {%>
         <script type="text/javascript" src="../static/js/jweixin-1.2.0.js"></script>
